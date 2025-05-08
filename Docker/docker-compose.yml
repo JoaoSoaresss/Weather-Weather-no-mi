@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: ./  # O diretório onde o Dockerfile está
+      dockerfile: DockerFile  # Nome do arquivo Dockerfile
+    container_name: dewtech-app
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ../src:/var/www/  # Monta o diretório src local para o contêiner
+
+  apache:
+    image: php:8.2-apache
+    container_name: dewtech-apache
+    restart: always
+    ports:
+      - "8000:80"  # Mapeia a porta 8000 para a 80 do Apache
+    volumes:
+      - ../src:/var/www/  # Monta o diretório src local para o contêiner Apache
+      - ../src:/usr/local/apache2/htdocs  # Garante que o Apache leia os arquivos do src
+      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf  # Ajusta o caminho do httpd.conf
+    environment:
+      - APACHE_RUN_DIR=/var/run/apache2
+      - APACHE_PID_FILE=/var/run/apache2/apache2.pid
+      - APACHE_LOCK_DIR=/var/run/apache2
+      - APACHE_LOG_DIR=/var/log/apache2
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    command: >
+      bash -c "chmod -R 755 /var/www && chown -R www-data:www-data /var/www && apache2 -D FOREGROUND"

@@ -1,0 +1,139 @@
+:root {
+  --primary-color: #0d6efd;
+  --secondary-color: #6c757d;
+  --success-color: #198754;
+  --info-color: #0dcaf0;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+}
+
+/* Base Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  height: 70px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1030;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Sidebar */
+.offcanvas-start {
+  width: 280px;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.offcanvas-header {
+  padding: 1rem 1.5rem;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  color: #495057;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.sidebar-item:hover {
+  background-color: #e9ecef;
+  color: var(--primary-color);
+}
+
+.sidebar-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.sidebar-item i {
+  width: 24px;
+  text-align: center;
+}
+
+/* Main Content */
+main {
+  padding-top: 1.5rem;
+}
+
+h2, h3, h4 {
+  font-weight: 600;
+  color: var(--dark-color);
+}
+
+/* Weather Card */
+.weather-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+  border: none;
+}
+
+.weather-icon {
+  width: 120px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.weather-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.weather-detail i {
+  font-size: 1.25rem;
+}
+
+/* Forecast */
+.forecast-day {
+  padding: 1rem 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.forecast-day:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+}
+
+/* Charts */
+.chart-container {
+  position: relative;
+  height: 250px;
+  width: 100%;
+}
+
+
+
+@media (max-width: 992px) {
+  .offcanvas-start {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand span {
+    display: none;
+  }
+  
+  .weather-detail {
+    font-size: 0.9rem;
+  }
+}
+
+

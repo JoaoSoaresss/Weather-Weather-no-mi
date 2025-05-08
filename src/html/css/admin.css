@@ -1,0 +1,141 @@
+/* Estilos gerais */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+/* Navbar */
+.navbar {
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.navbar-brand img {
+  margin-right: 0.5rem;
+}
+
+/* Tabs */
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+  color: #495057;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+}
+
+.nav-tabs .nav-link:hover {
+  border-color: transparent;
+  color: #0d6efd;
+}
+
+.nav-tabs .nav-link.active {
+  color: #0d6efd;
+  background-color: transparent;
+  border-bottom: 2px solid #0d6efd;
+}
+
+/* Cards */
+.card {
+  border: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  margin-bottom: 1.5rem;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  font-weight: 500;
+  padding: 0.75rem 1.25rem;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.card-title i {
+  font-size: 1.25rem;
+}
+
+/* Tabelas */
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  border-bottom-width: 1px;
+  font-weight: 500;
+  background-color: #f8f9fa;
+}
+
+/* Formulários */
+.form-label {
+  font-weight: 500;
+}
+
+.form-control, .form-select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+}
+
+/* Botões */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+}
+
+.btn-outline-light {
+  border-color: #f8f9fa;
+  color: #f8f9fa;
+}
+
+.btn-outline-light:hover {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+/* Footer */
+footer {
+  padding: 1rem 0;
+  font-size: 0.875rem;
+}
+
+/* Ícones de ação */
+.bi-pencil-square, .bi-trash {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.bi-pencil-square:hover {
+  color: #0d6efd;
+}
+
+.bi-trash:hover {
+  color: #dc3545;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .nav-tabs .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+}
