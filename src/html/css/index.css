@@ -79,8 +79,15 @@ h2, h3, h4 {
 .weather-card {
   border-radius: 12px;
   overflow: hidden;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%);
+  background: linear-gradient(135deg, #a8a8a8 0%, #e4e8ed 100%);
   border: none;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #e4e8ed 0%, #59a2dd 100%);
 }
 
 .weather-icon {
@@ -100,24 +107,266 @@ h2, h3, h4 {
   font-size: 1.25rem;
 }
 
-/* Forecast */
+
 .forecast-day {
-  padding: 1rem 0.5rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  text-align: center;
+  padding: 15px 10px;
 }
-
-.forecast-day:hover {
-  background-color: rgba(13, 110, 253, 0.1);
-}
-
-/* Charts */
-.chart-container {
-  position: relative;
-  height: 250px;
+.forecast-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
   width: 100%;
 }
+.detailed-info {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
 
+.loading {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1000;
+}
+.weather-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease;
+}
+#forecast-chart {
+  max-height: 300px;
+}
+.search-container {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+}
+.search-container .input-group {
+  margin-top: 10px;
+}
+
+
+
+
+/* Dark Mode Styl */
+.dark-mode {
+  background-color: #1a1a2e !important;
+  color: #e6e6e6;
+}
+
+
+.dark-mode html,
+.dark-mode body {
+  background-color: #1a1a2e !important;
+}
+
+
+.dark-mode .card,
+.dark-mode .offcanvas,
+.dark-mode .weather-card {
+  background-color: #16213e !important;
+  color: #e6e6e6 !important;
+  border-color: #2a3a5e !important;
+}
+
+
+.dark-mode .forecast-day {
+  background: #16213e !important;
+  color: #e6e6e6 !important;
+  background-image: none !important;
+  border: 1px solid #2a3a5e !important;
+}
+
+
+.dark-mode .weather-card:hover {
+  background: #1e2a47 !important;
+  background-image: none !important;
+}
+
+.dark-mode .weather-card {
+  background: #16213e !important; 
+  background-image: none !important;
+}
+
+
+.dark-mode .navbar {
+  background-color: #0f3460 !important;
+  border-bottom: 1px solid #2a3a5e !important;
+}
+
+.dark-mode .btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+
+.dark-mode h1,
+.dark-mode h2,
+.dark-mode h3,
+.dark-mode h4,
+.dark-mode h5,
+.dark-mode .fw-bold {
+  color: #ffffff !important;
+}
+
+
+
+.dark-mode .sidebar-item {
+  color: #e6e6e6;
+}
+
+.dark-mode .sidebar-item:hover {
+  background-color: #0f3460;
+}
+
+.dark-mode .sidebar-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+
+
+.dark-mode .text-muted {
+  color: #b8b8b8 !important;
+}
+
+.dark-mode p {
+  color: #e6e6e6;
+}
+
+
+
+.dark-mode .form-select,
+.dark-mode .form-control {
+  background-color: #1e2a47;
+  border-color: #2a3a5e;
+  color: #e6e6e6;
+}
+
+
+.dark-mode .form-control::placeholder {
+  color: #e6e6e6;
+}
+
+
+
+.dark-mode .table {
+  color: #e6e6e6;
+}
+
+.dark-mode .table th {
+  background-color: #1e2a47;
+}
+
+.dark-mode .table-hover tbody tr:hover {
+  background-color: #2a3a5e;
+  color: #ffffff;
+}
+
+
+
+.dark-mode footer {
+  background-color: #0f0f23 !important;
+  color: #e6e6e6 !important;
+}
+
+
+
+.dark-mode .list-group-item {
+  background-color: #1e2a47;
+  color: #e6e6e6;
+  border-color: #2a3a5e;
+}
+
+.dark-mode .list-group-item:hover {
+  background-color: #2a3a5e;
+}
+
+/* Dropdown Menus */
+.dark-mode .dropdown-menu {
+  background-color: #1e2a47;
+  border-color: #2a3a5e;
+}
+
+.dark-mode .dropdown-item {
+  color: #e6e6e6;
+}
+
+.dark-mode .dropdown-item:hover {
+  background-color: #2a3a5e;
+}
+
+/* Input Groups */
+.dark-mode .input-group-text {
+  background-color: #2a3a5e;
+  color: #e6e6e6;
+  border-color: #2a3a5e;
+}
+
+
+
+.dark-mode .form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Main content areas */
+.dark-mode .bg-light {
+  background-color: #1a1a2e !important;
+}
+
+.dark-mode .content-wrapper {
+  background-color: #1a1a2e !important;
+}
+
+/* Background effects */
+.dark-mode .weather-bg {
+  opacity: 0.4;
+}
+
+/* Forecast containers */
+.dark-mode .forecast-container .weather-card,
+.dark-mode .forecast-container .forecast-day {
+  background-color: #16213e !important;
+  color: #e6e6e6 !important;
+}
+
+/* Loading screen */
+.dark-mode .loading {
+  background: rgba(26, 26, 46, 0.8) !important;
+}
+
+/* Section for fixing white areas */
+.dark-mode .container,
+.dark-mode .container-fluid,
+.dark-mode .row,
+.dark-mode .col,
+.dark-mode [class^="col-"] {
+  background-color: transparent !important;
+}
+
+/* This helps with Bootstrap's container classes */
+.dark-mode .bg-white {
+  background-color: #16213e !important;
+}
+
+/* Fix for the top navigation bar area */
+.dark-mode .navbar-dark {
+  background-color: #0f3460 !important;
+}
 
 
 @media (max-width: 992px) {
@@ -135,5 +384,6 @@ h2, h3, h4 {
     font-size: 0.9rem;
   }
 }
+
 
 

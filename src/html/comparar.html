@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparar Temperaturas</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/comparar.css">
+</head>
+<body class="bg-light">
+
+  <!-- Top Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4 py-3 shadow-sm">
+    <div class="container-fluid">
+      <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+        <i class="bi bi-list fs-4"></i>
+      </button>
+      
+      <a class="navbar-brand d-flex align-items-center gap-2 fs-4 m-0" href="#">
+        <img src="img/logo/logo.png" alt="Logo" style="height: 50px;">
+        <span class="d-none d-sm-inline">Weather Weather no Mi</span>
+      </a>
+      
+      <div class="d-flex align-items-center ms-auto">
+        <a href="index.html" class="btn btn-outline-light">
+          <i class="bi bi-arrow-left me-1"></i>
+          <span class="d-none d-md-inline">Voltar</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-2 p-0">
+        <div class="offcanvas offcanvas-start bg-white border-end min-vh-100" tabindex="-1" id="sidebar">
+          <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+
+          <div class="offcanvas-body p-3">
+            <div class="nav flex-column gap-2">
+              <a href="index.html" class="nav-link sidebar-item">
+                <i class="bi bi-search me-3 fs-5"></i>
+                <span>Search City</span>
+              </a>
+              
+              <a href="comparar.html" class="nav-link sidebar-item active">
+                <i class="bi bi-graph-up me-3 fs-5"></i>
+                <span>Compare Temperatures</span>
+              </a>
+              
+              <a href="paises.html" class="nav-link sidebar-item">
+                <i class="bi bi-globe-americas me-3 fs-5"></i>
+                <span>Monitored Countries</span>
+              </a>
+              
+              <a href="#" class="nav-link sidebar-item">
+                <i class="bi bi-geo-alt me-3 fs-5"></i>
+                <span>My Location</span>
+              </a>
+              
+              <a href="admin.html" class="nav-link sidebar-item">
+                <i class="bi bi-gear me-3 fs-5"></i>
+                <span>Admin Panel</span>
+              </a>
+              
+              <div class="nav-link sidebar-item" id="darkModeToggle">
+                <i class="bi bi-moon me-3 fs-5"></i>
+                <span>Dark Mode</span>
+              </div>
+              
+              <div class="dropdown">
+                <a class="nav-link sidebar-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                  <i class="bi bi-calendar3 me-3 fs-5"></i>
+                  <span>Year: 2025</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">2024</a></li>
+                  <li><a class="dropdown-item" href="#">2023</a></li>
+                  <li><a class="dropdown-item" href="#">2022</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="container">
+        <main class="mx-auto p-4" style="max-width: 900px;">
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-5">
+          <h1 class="fw-bold mb-0">Comparar Países/Regiões</h1>
+          <div class="d-flex gap-2">
+            <button class="btn btn-primary" id="compareBtn">
+              <i class="bi bi-arrow-repeat me-1"></i> Comparar
+            </button>
+            <button class="btn btn-outline-secondary" id="exportBtn">
+              <i class="bi bi-download me-1"></i> Exportar
+            </button>
+          </div>
+        </div>
+
+        <!-- Comparison Controls -->
+        <div class="row g-4 mb-5">
+          <div class="col-md-5">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <h5 class="card-title fw-bold mb-4">Primeira Localização</h5>
+                   
+                <div class="mb-4">
+                  <label class="form-label fw-medium">Localização</label>
+                  <select class="form-select" id="location1Select">
+                    <option selected disabled>Selecione...</option>
+                    <option value="pt">Portugal</option>
+                    <option value="br">Brasil</option>
+                    <option value="es">Espanha</option>
+                    <option value="fr">França</option>
+                    <option value="us">Estados Unidos</option>
+                  </select>
+                </div>
+                
+                <div class="mb-4">
+                  <label class="form-label fw-medium">Período</label>
+                  <select class="form-select" id="location1Period">
+                    <option value="last30">Últimos 30 dias</option>
+                    <option value="last90">Últimos 90 dias</option>
+                    <option value="last365">Últimos 365 dias</option>
+                    <option value="custom" selected>Personalizado</option>
+                  </select>
+                </div>
+                
+                <div class="row g-3" id="location1CustomDates">
+                  <div class="col-md-6">
+                    <label class="form-label">Data Inicial</label>
+                    <input type="date" class="form-control" value="Today">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Data Final</label>
+                    <input type="date" class="form-control" value="Today">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-2 d-flex align-items-center justify-content-center">
+            <div class="vr d-none d-md-block" style="height: 300px;"></div>
+            <div class="text-center d-md-none py-3">
+              <i class="bi bi-arrow-down fs-4 text-muted"></i>
+            </div>
+          </div>
+          
+          <div class="col-md-5">
+            <div class="card shadow-sm border-0 h-100">
+              <div class="card-body">
+                <h5 class="card-title fw-bold mb-4">Segunda Localização</h5>
+                
+                <div class="mb-4">
+                  <label class="form-label fw-medium">Localização</label>
+                  <select class="form-select" id="location2Select">
+                    <option selected disabled>Selecione...</option>
+                    <option value="pt">Portugal</option>
+                    <option value="br">Brasil</option>
+                    <option value="es">Espanha</option>
+                    <option value="fr">França</option>
+                    <option value="us">Estados Unidos</option>
+                  </select>
+                </div>
+                
+                <div class="mb-4">
+                  <label class="form-label fw-medium">Período</label>
+                  <select class="form-select" id="location2Period">
+                    <option value="last30">Últimos 30 dias</option>
+                    <option value="last90">Últimos 90 dias</option>
+                    <option value="last365">Últimos 365 dias</option>
+                    <option value="custom" selected>Personalizado</option>
+                  </select>
+                </div>
+                
+                <div class="row g-3" id="location2CustomDates">
+                  <div class="col-md-6">
+                    <label class="form-label">Data Inicial</label>
+                    <input type="date" class="form-control" value="Today">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Data Final</label>
+                    <input type="date" class="form-control" value="Today">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison Results -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <div class="card shadow-sm border-0">
+              <div class="card-body">
+                <h3 class="fw-bold mb-4">Comparação de Temperaturas</h3>
+                
+                <ul class="nav nav-tabs mb-4" id="comparisonTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="chart-tab" data-bs-toggle="tab" data-bs-target="#chart-tab-pane" type="button">Gráfico</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#table-tab-pane" type="button">Tabela</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats-tab-pane" type="button">Estatísticas</button>
+                  </li>
+                </ul>
+                
+                <div class="tab-content" id="comparisonTabsContent">
+                  <div class="tab-pane fade show active" id="chart-tab-pane" role="tabpanel">
+                    <div class="chart-container">
+                      <canvas id="comparisonChart"></canvas>
+                    </div>
+                  </div>
+                  
+                  <div class="tab-pane fade" id="table-tab-pane" role="tabpanel">
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Data</th>
+                            <th>Local 1 Temp (°C)</th>
+                            <th>Local 2 Temp (°C)</th>
+                            <th>Diferença</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>2024-01-01</td>
+                            <td>15.2</td>
+                            <td>28.5</td>
+                            <td class="text-danger">+13.3</td>
+                          </tr>
+                          <tr>
+                            <td>2024-01-02</td>
+                            <td>14.8</td>
+                            <td>27.9</td>
+                            <td class="text-danger">+13.1</td>
+                          </tr>
+                          <!-- Mais linhas de dados aqui -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  
+                  <div class="tab-pane fade" id="stats-tab-pane" role="tabpanel">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="card mb-4">
+                          <div class="card-body">
+                            <h5 class="card-title fw-bold">Médias</h5>
+                            <div class="row">
+                              <div class="col-6">
+                                <div class="stat-card">
+                                  <div class="stat-value text-primary">16.4°C</div>
+                                  <div class="stat-label">Média Local 1</div>
+                                </div>
+                              </div>
+                              <div class="col-6">
+                                <div class="stat-card">
+                                  <div class="stat-value text-danger">28.2°C</div>
+                                  <div class="stat-label">Média Local 2</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card mb-4">
+                          <div class="card-body">
+                            <h5 class="card-title fw-bold">Extremos</h5>
+                            <div class="row">
+                              <div class="col-6">
+                                <div class="stat-card">
+                                  <div class="stat-value">23.1°C</div>
+                                  <div class="stat-label">Máx. Local 1</div>
+                                </div>
+                              </div>
+                              <div class="col-6">
+                                <div class="stat-card">
+                                  <div class="stat-value">32.5°C</div>
+                                  <div class="stat-label">Máx. Local 2</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+
+    
+        <!-- Footer -->
+        <footer class="mt-5 text-center text-muted small">
+          <p class="mb-1">© 2024 Weather Weather no Mi. All Rights Reserved.</p>
+          <p class="mb-0">Data provided by OpenWeatherMap and other sources</p>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Custom JS -->
+  <script src="js/comparar.js"></script>
+</body>
+</html>
