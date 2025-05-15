@@ -65,15 +65,15 @@ body {
   text-align: center;
 }
 
-/* Main Content */
-main {
-  padding-top: 1.5rem;
-}
+  /* Main Content */
+  main {
+    padding-top: 1.5rem;
+  }
 
-h2, h3, h4 {
-  font-weight: 600;
-  color: var(--dark-color);
-}
+  h2, h3, h4 {
+    font-weight: 600;
+    color: var(--dark-color);
+  }
 
 /* Weather Card */
 .weather-card {
